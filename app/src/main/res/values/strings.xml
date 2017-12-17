@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Projeto Final</string>
+    <string name="btpf">Inserir Pessoa Fisica</string>
+    <string name="devby">Desenvolvido por Jeferson Rodrigues - v.1.0</string>
+    <string name="app_titulo">Sistema Cadastral de Pessoa Fisica</string>
+    <string name="btInserir">Inserir</string>
+    <string name="btListar">Listar</string>
+    <string name="btVoltar">Voltar</string>
+    <string name="tvNome">Nome</string>
+    <string name="tvCPF">CPF</string>
+    <string name="tvIdade">Idade</string>
+    <string name="tvTelefone">Telefone</string>
+    <string name="tvEmail">E-Mail</string>
+
+</resources>
