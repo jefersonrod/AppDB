@@ -29,7 +29,7 @@ public class DBHelper {
     private SQLiteStatement insertStnt;
 
     /*Preparando a instrução SQL para que possa ser reaproveitada em qualquer ocasião*/
-    private static final String INSERT = "insert into " + TABLE_NAME + " (nome, cpf,idade, telefone, email) VALUES (?,?,?,?,?)";
+    private static final String INSERT = "insert into " + TABLE_NAME + " (nome, cpf, idade, telefone, email) VALUES (?,?,?,?,?)";
 
     /*Criando o consultor DBHelper*/
     public DBHelper(Context context) {
