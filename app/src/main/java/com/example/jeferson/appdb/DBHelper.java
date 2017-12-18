@@ -1,3 +1,14 @@
+//******************************************************
+
+//Instituto Federal de São Paulo - Campus Sertãozinho
+
+//Disciplina......: M4DADM
+
+//Programação de Computadores e Dispositivos Móveis
+
+//Aluno...........: Jeferson Rodrigues
+
+//******************************************************
 package com.example.jeferson.appdb;
 
 import android.content.Context;
@@ -10,12 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by andre on 08/12/2016.
+ * Created by Jeferson on 17/12/2016.
  */
 
 public class DBHelper {
 
-    /*Declarando os atributos da classe*/
+    // OBJETIVO.......: Declarar  atributos da classe
 
     private static final String DATABASE_NAME = "sistemacadpf.db"; /*Nome do banco de dados*/
     private static final int DATABASE_VERSION = 1; /*Versão do banco de dados*/
@@ -24,14 +35,14 @@ public class DBHelper {
     private Context context;
     private SQLiteDatabase db;
 
-    /*Outros atributos necessários para a criação ao suporte para o banco de dados*/
+    // OBJETIVO.......:  atributos para a criação do banco de dados
 
     private SQLiteStatement insertStnt;
 
-    /*Preparando a instrução SQL para que possa ser reaproveitada em qualquer ocasião*/
+    // OBJETIVO.......: Preparar a instrução SQL para ser reaproveitada em qualquer sessão
     private static final String INSERT = "insert into " + TABLE_NAME + " (nome, cpf, idade, telefone, email) VALUES (?,?,?,?,?)";
 
-    /*Criando o consultor DBHelper*/
+    // OBJETIVO.......: Criar o DBHelper
     public DBHelper(Context context) {
         this.context = context;
         OpenHelper openHelper = new OpenHelper(this.context);
@@ -39,7 +50,7 @@ public class DBHelper {
         this.insertStnt = this.db.compileStatement(INSERT);
     }
 
-    /*Esse bloco de código será requisitado na MAIN ACTIVITY*/
+
     public long insert(String nome, String cpf, String idade, String telefone, String email) {
         this.insertStnt.bindString(1, nome);
         this.insertStnt.bindString(2, cpf);
@@ -50,13 +61,8 @@ public class DBHelper {
         return this.insertStnt.executeInsert();
     }
 
-    /*Criando uma instrução para apagar os registros*/
-    public void deleteAll() {
-        this.db.delete(TABLE_NAME, null, null);
-    }
 
-    /*Criando uma instrução para recuperar as informações do banco de dados*/
-    /*A instrução retornará os dados em forma de lista*/
+    // OBJETIVO.......: Retornar informações do BD em formato lista
 
     public List<Contato> recuperaDados() {
 
@@ -69,33 +75,33 @@ public class DBHelper {
             if (contaRegistros != 0) {
                 cursor.moveToFirst();
                 do {
-                    Contato contato = new Contato(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+                    Contato contato = new Contato(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
                     list.add(contato);
                 } while (cursor.moveToNext());
-                /*Aqui anteriormente estava como cursor != null e retornava erros*/
-                if (cursor == null && cursor.isClosed()) {
+
+                if (cursor != null && ! cursor.isClosed())
                     cursor.close();
                     return list;
-                } else {
-                    return null;
-                }
-            }
-        } catch (Exception err) {
-            return null;
+            } else
+                 return null;
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            //return null;
         }
         return list;
     }
 
-    /*Criando uma classe dentro da classe -> Denominada innner class*/
+    // OBJETIVO.......: Criar o banco de dados caso não exista
     private static class OpenHelper extends SQLiteOpenHelper {
 
         OpenHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
 
-        /*Implementando o método void para validar a inner class*/
+
         public void onCreate(SQLiteDatabase db) {
-            String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (id_recebedados INTEGER PRIMARY KEY AUTO INCREMENT, nome TEXT, cpf TEXT, idade TEXT, telefone TEXT, email TEXT);";
+            String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (idCad INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, cpf TEXT, idade TEXT, telefone TEXT, email TEXT);";
             db.execSQL(sql);
         }
 

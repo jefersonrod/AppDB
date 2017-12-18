@@ -1,8 +1,20 @@
+//******************************************************
+
+//Instituto Federal de São Paulo - Campus Sertãozinho
+
+//Disciplina......: M4DADM
+
+//Programação de Computadores e Dispositivos Móveis
+
+//Aluno...........: Jeferson Rodrigues
+
+//******************************************************
 package com.example.jeferson.appdb;
 
 /**
  * Created by Jeferson on 17/12/2017.
  */
+// OBJETIVO.......: Classe contato com seu construtor e Getters/Setters
 public class Contato {
 
     private String nome;
